@@ -17,16 +17,7 @@ A powerful Ghidra plugin that integrates Large Language Models (LLMs) to enhance
 
 ## 🎥 Demo
 
-[![Demo](assets/demo-thumbnail.png)](assets/demo.gif)
-
-*👆 Click the image above to watch GhidraGPT in action*
-
-**Key Demo Highlights:**
-- 🔧 **Code Enhancement**: AI-powered function and variable renaming in real-time
-- 💬 **Code Explanation**: Detailed function explanations being generated
-- 🔍 **Vulnerability Analysis**: Security analysis and threat detection in action
-- ⚙️ **Multi-Provider Support**: Configuration and usage with different AI providers
-- 🛠️ **Real Workflow**: Complete reverse engineering workflow integration
+![Demo](assets/demo.gif)
 
 ## 🚀 Features
 
