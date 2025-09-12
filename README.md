@@ -17,11 +17,7 @@ A powerful Ghidra plugin that integrates Large Language Models (LLMs) to enhance
 
 ## 🎥 Demo
 
-<div align="center">
-  <a href="assets/demo.mp4">
-    <img src="assets/demo-thumbnail.png" alt="GhidraGPT Demo" width="600">
-  </a>
-</div>
+[![Demo](assets/demo-thumbnail.png)](assets/demo.gif)
 
 *👆 Click the image above to watch GhidraGPT in action*
 
