@@ -1,0 +1,100 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs "/usr/share/ghidra/Ghidra/Framework/Generic/lib"
+        dirs "/usr/share/ghidra/Ghidra/Framework/SoftwareModeling/lib"
+        dirs "/usr/share/ghidra/Ghidra/Framework/Utility/lib"
+        dirs "/usr/share/ghidra/Ghidra/Framework/Docking/lib"
+        dirs "/usr/share/ghidra/Ghidra/Framework/Project/lib"
+        dirs "/usr/share/ghidra/Ghidra/Framework/Gui/lib"
+        dirs "/usr/share/ghidra/Ghidra/Framework/Help/lib"
+        dirs "/usr/share/ghidra/Ghidra/Features/Decompiler/lib"
+        dirs "/usr/share/ghidra/Ghidra/Features/Base/lib"
+    }
+}
+
+dependencies {
+    // Ghidra dependencies
+    implementation name: 'Generic', version: ''
+    implementation name: 'SoftwareModeling', version: ''
+    implementation name: 'Decompiler', version: ''
+    implementation name: 'Base', version: ''
+    implementation name: 'Utility', version: ''
+    implementation name: 'Docking', version: ''
+    implementation name: 'Project', version: ''
+    implementation name: 'Gui', version: ''
+    implementation name: 'Help', version: ''
+    
+    // HTTP client for API calls
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+compileJava {
+    options.compilerArgs += ['-Xlint:unchecked', '-Xlint:deprecation']
+}
+
+jar {
+    baseName = 'GhidraGPT'
+    version = '1.0.0'
+    
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    
+    manifest {
+        attributes(
+            'Implementation-Title': 'GhidraGPT Plugin',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'GhidraGPT'
+        )
+    }
+}
+
+task zipPlugin(type: Zip) {
+    baseName = 'GhidraGPT'
+    version = '1.0.0'
+    extension = 'zip'
+    
+    // Create proper Ghidra extension structure
+    into('GhidraGPT') {
+        // Plugin JAR goes in lib directory
+        into('lib') {
+            from jar.archivePath
+        }
+        
+        // Extension metadata files
+        from 'extension.properties'
+        from 'Module.manifest'
+        
+        // Data files
+        from('data') {
+            into 'data'
+        }
+        
+        // Ghidra scripts directory
+        from('ghidra_scripts') {
+            into 'ghidra_scripts'
+        }
+    }
+    
+    destinationDir = file("$buildDir/distributions")
+}
+
+build.dependsOn zipPlugin
+
+// Clean task
+clean {
+    delete 'build'
+}
