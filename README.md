@@ -20,7 +20,7 @@ A powerful Ghidra plugin that integrates Large Language Models (LLMs) to enhance
 ![Demo](assets/demo.gif)
 
 
-## ⚡ Disclaimer: Real-Time Performance
+## ⚡ Real-Time Performance
 
 For optimal real-time performance, it is strongly recommended to use smaller and faster models such as **grok-3**, **gpt-3**, or **gemini-2.5-flash**. These models deliver quicker responses, making them ideal for interactive and latency-sensitive reverse engineering workflows. Using larger models may result in slower response times.
 
